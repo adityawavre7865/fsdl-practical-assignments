@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MediBook — Doctor Appointment Portal</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <!-- ─── Navbar ──────────────────────────────────────────────── -->
+  <header class="navbar">
+    <div class="navbar-inner">
+      <div class="navbar-brand">
+        <div class="navbar-logo">
+          <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
+            <path d="M10 2v16M2 10h16" stroke="#fff" stroke-width="2.5" stroke-linecap="round" />
+          </svg>
+        </div>
+        <span class="navbar-name">MediBook</span>
+      </div>
+      <nav class="nav-links">
+        <a class="nav-link active" data-page="home">Home</a>
+        <a class="nav-link" data-page="booking">Book Appointment</a>
+        <a class="nav-link" data-page="appointments">All Appointments</a>
+      </nav>
+      <button class="btn-nav-cta" data-page="booking">Book Now</button>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════ PAGE: HOME ═════════ -->
+  <div id="page-home" class="page">
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <p class="hero-eyebrow animate-up delay-1">Doctor Appointment Portal</p>
+          <h1 class="hero-title animate-up delay-2">Healthcare,<br>Simplified.</h1>
+          <p class="hero-desc animate-up delay-3">Book with top specialists in seconds. No waiting rooms, no phone
+            calls.</p>
+          <div class="hero-cta animate-up delay-4">
+            <button class="btn btn-primary" data-page="booking">Book an Appointment</button>
+            <button class="btn btn-ghost" data-page="appointments">View Appointments</button>
+          </div>
+        </div>
+      </div>
+      <div class="hero-line"></div>
+    </section>
+
+    <!-- Stats -->
+    <section class="stats-section animate-up delay-5">
+      <div class="container">
+        <div class="stats-row">
+          <div class="stat"><span class="stat-n">5</span><span class="stat-l">Specialists</span></div>
+          <div class="stat-sep"></div>
+          <div class="stat"><span class="stat-n">8</span><span class="stat-l">Daily Slots</span></div>
+          <div class="stat-sep"></div>
+          <div class="stat"><span class="stat-n">100%</span><span class="stat-l">Online</span></div>
+          <div class="stat-sep"></div>
+          <div class="stat"><span class="stat-n">24/7</span><span class="stat-l">Portal Access</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Doctors -->
+    <section class="section">
+      <div class="container">
+        <div class="section-hd">
+          <h2 class="section-title">Our Specialists</h2>
+          <p class="section-sub">Experienced doctors across multiple disciplines.</p>
+        </div>
+        <div class="doctors-grid" id="homeDoctorGrid"></div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="section section-tinted">
+      <div class="container">
+        <div class="section-hd">
+          <h2 class="section-title">How It Works</h2>
+          <p class="section-sub">Three steps to your appointment.</p>
+        </div>
+        <div class="steps-row">
+          <div class="step">
+            <div class="step-n">01</div>
+            <h3 class="step-title">Choose a Doctor</h3>
+            <p class="step-desc">Select a specialist from our panel based on your needs.</p>
+          </div>
+          <div class="step-arrow">&#8594;</div>
+          <div class="step">
+            <div class="step-n">02</div>
+            <h3 class="step-title">Pick a Slot</h3>
+            <p class="step-desc">Choose a date and available time that works for you.</p>
+          </div>
+          <div class="step-arrow">&#8594;</div>
+          <div class="step">
+            <div class="step-n">03</div>
+            <h3 class="step-title">Confirm</h3>
+            <p class="step-desc">Submit your details and receive a booking confirmation instantly.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container footer-inner">
+        <span class="footer-brand">MediBook</span>
+        <span class="footer-copy">Full Stack Development &mdash; Assignment 6</span>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- ════════════════════════════════════ PAGE: BOOKING ═════════ -->
+  <div id="page-booking" class="page hidden">
+
+    <div class="inner-hero">
+      <div class="container">
+        <h1 class="inner-title animate-up delay-1">Book an Appointment</h1>
+        <p class="inner-sub animate-up delay-2">Fill in your details to schedule a consultation.</p>
+      </div>
+    </div>
+
+    <div class="container inner-body">
+      <div class="booking-layout">
+
+        <div class="card animate-up delay-2">
+          <h2 class="card-title">Appointment Details</h2>
+          <p class="card-sub">All fields are required.</p>
+
+          <form id="bookingForm" novalidate>
+            <div class="field-row">
+              <div class="field">
+                <label for="name">Full Name</label>
+                <input id="name" name="name" type="text" placeholder="e.g. Rahul Verma" required>
+              </div>
+              <div class="field">
+                <label for="phone">Phone Number</label>
+                <input id="phone" name="phone" type="tel" placeholder="10-digit number" maxlength="10" required>
+              </div>
+            </div>
+
+            <div class="field">
+              <label>Select Doctor</label>
+              <div class="doctor-grid" id="bookingDoctorGrid"></div>
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="date">Date</label>
+                <input id="date" name="date" type="date" required>
+              </div>
+              <div class="field">
+                <label for="slot">Time Slot</label>
+                <select id="slot" name="slot" required>
+                  <option value="" disabled selected>Choose a slot</option>
+                </select>
+              </div>
+            </div>
+
+            <button class="btn btn-primary btn-full" type="submit" id="submitBtn">Confirm Appointment</button>
+            <p class="msg" id="statusMsg"></p>
+          </form>
+        </div>
+
+        <div class="sidebar animate-up delay-3">
+          <div class="card info-card">
+            <h3 class="info-title">Before You Visit</h3>
+            <ul class="info-list">
+              <li>Arrive 10 minutes before your slot.</li>
+              <li>Carry a valid photo ID.</li>
+              <li>Bring previous prescriptions if any.</li>
+              <li>Cancel anytime from the appointments page.</li>
+            </ul>
+          </div>
+          <div class="card info-card">
+            <h3 class="info-title">Clinic Hours</h3>
+            <div class="hours-row"><span>Morning</span><span>9:00 AM – 12:00 PM</span></div>
+            <div class="hours-row"><span>Afternoon</span><span>2:00 PM – 5:00 PM</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══════════════════════════════ PAGE: APPOINTMENTS ══════════ -->
+  <div id="page-appointments" class="page hidden">
+
+    <div class="inner-hero">
+      <div class="container appt-header">
+        <div class="animate-up delay-1">
+          <h1 class="inner-title">All Appointments</h1>
+          <p class="inner-sub">Live view of all scheduled appointments.</p>
+        </div>
+        <span class="badge animate-up delay-2" id="countBadge">0 Total</span>
+      </div>
+    </div>
+
+    <div class="container inner-body">
+      <div class="card animate-up delay-2">
+        <ul class="booking-list" id="bookingList">
+          <li class="empty-state">
+            <div class="empty-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+                <rect x="3" y="4" width="18" height="18" rx="2" />
+                <path d="M16 2v4M8 2v4M3 10h18" />
+              </svg>
+            </div>
+            <p>No appointments booked yet.</p>
+            <button class="btn btn-primary" style="margin-top:14px;width:auto;padding:9px 22px;"
+              data-page="booking">Book an Appointment</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ─── Confirmation Modal ───────────────────────────────────── -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <div class="modal-check">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#38a169" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 13l4 4L19 7" />
+        </svg>
+      </div>
+      <h2 class="modal-title">Appointment Confirmed</h2>
+      <p class="modal-sub">Please arrive 10 minutes before your scheduled time.</p>
+      <div class="receipt">
+        <div class="receipt-row"><span class="rl">Patient</span><span class="rv" id="r-name">—</span></div>
+        <div class="receipt-row"><span class="rl">Phone</span><span class="rv" id="r-phone">—</span></div>
+        <div class="receipt-row"><span class="rl">Doctor</span><span class="rv" id="r-doctor">—</span></div>
+        <div class="receipt-row"><span class="rl">Specialty</span><span class="rv" id="r-specialty">—</span></div>
+        <div class="receipt-row"><span class="rl">Date</span><span class="rv" id="r-date">—</span></div>
+        <div class="receipt-row"><span class="rl">Time</span><span class="rv" id="r-slot">—</span></div>
+        <p class="receipt-id" id="r-id"></p>
+      </div>
+      <button class="btn btn-primary btn-full" id="modalClose">Done</button>
+    </div>
+  </div>
+
+  <!-- ─── Script ───────────────────────────────────────────────── -->
+  <script type="module">
+
+    const pages = ["home", "booking", "appointments"];
+
+    function showPage(name) {
+      pages.forEach(p => {
+        const el = document.getElementById(`page-${p}`);
+        el.classList.toggle("hidden", p !== name);
+        if (p === name) {
+          // Re-trigger animations on page switch
+          el.querySelectorAll(".animate-up").forEach(a => {
+            a.style.animation = "none";
+            a.offsetHeight; // reflow
+            a.style.animation = "";
+          });
+        }
+      });
+      document.querySelectorAll(".nav-link").forEach(l => l.classList.toggle("active", l.dataset.page === name));
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      if (name === "appointments") loadBookings();
+    }
+
+    document.addEventListener("click", e => {
+      const el = e.target.closest("[data-page]");
+      if (el) showPage(el.dataset.page);
+    });
+
+    async function loadSlots() {
+      const data = await fetch("/api/slots").then(r => r.json());
+      const sel = document.getElementById("slot");
+      data.forEach(s => { const o = document.createElement("option"); o.value = s; o.textContent = s; sel.appendChild(o); });
+    }
+
+    async function loadDoctors() {
+      const data = await fetch("/api/doctors").then(r => r.json());
+
+      document.getElementById("homeDoctorGrid").innerHTML = data.map((d, i) => `
+      <div class="doctor-card animate-up" style="animation-delay:${0.1 + i * 0.07}s">
+        <div class="doc-av">${d.name.split(" ").pop()[0]}</div>
+        <div class="doc-info">
+          <div class="doc-name">${d.name}</div>
+          <div class="doc-spec">${d.specialty}</div>
+          <div class="doc-exp">${d.experience} exp.</div>
+        </div>
+        <button class="btn btn-outline btn-sm" data-page="booking">Book</button>
+      </div>`).join("");
+
+      document.getElementById("bookingDoctorGrid").innerHTML = data.map(d => `
+      <label class="doc-opt" data-id="${d.id}">
+        <input type="radio" name="doctorId" value="${d.id}">
+        <span class="dopt-name">${d.name}</span>
+        <span class="dopt-spec">${d.specialty}</span>
+        <span class="dopt-exp">${d.experience}</span>
+      </label>`).join("");
+
+      document.querySelectorAll(".doc-opt").forEach(el => {
+        el.addEventListener("click", () => {
+          document.querySelectorAll(".doc-opt").forEach(e => e.classList.remove("selected"));
+          el.classList.add("selected");
+          el.querySelector("input").checked = true;
+          selectedDoctorId = el.dataset.id;
+        });
+      });
+    }
+
+    async function loadBookings() {
+      const data = await fetch("/api/appointments").then(r => r.json());
+      const list = document.getElementById("bookingList");
+      const badge = document.getElementById("countBadge");
+      badge.textContent = `${data.length} Total`;
+      if (!data.length) {
+        list.innerHTML = `<li class="empty-state">
+        <div class="empty-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
+        <p>No appointments booked yet.</p>
+        <button class="btn btn-primary" style="margin-top:14px;width:auto;padding:9px 22px;" data-page="booking">Book an Appointment</button>
+      </li>`;
+        return;
+      }
+      list.innerHTML = data.map((a, i) => `
+      <li class="booking-item animate-up" style="animation-delay:${i * 0.06}s">
+        <div class="bk-av">${a.name[0].toUpperCase()}</div>
+        <div class="bk-info">
+          <div class="bk-name">${esc(a.name)}</div>
+          <div class="bk-detail">${fmtDate(a.date)} &middot; ${esc(a.slot)}</div>
+          <div class="bk-doc">${esc(a.doctorName)} &middot; ${esc(a.specialty)}</div>
+        </div>
+        <button class="btn-cancel" data-id="${a._id}">Cancel</button>
+      </li>`).join("");
+    }
+
+    let selectedDoctorId = null;
+    const form = document.getElementById("bookingForm");
+    const msg = document.getElementById("statusMsg");
+    const sub = document.getElementById("submitBtn");
+
+    form.addEventListener("submit", async e => {
+      e.preventDefault();
+      msg.className = "msg";
+      if (!selectedDoctorId) { setMsg("Please select a doctor.", "error"); return; }
+      const body = { name: form.name.value.trim(), phone: form.phone.value.trim(), date: form.date.value, slot: document.getElementById("slot").value, doctorId: selectedDoctorId };
+      sub.disabled = true; sub.textContent = "Booking...";
+      try {
+        const res = await fetch("/api/appointments", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+        const data = await res.json();
+        if (!res.ok) { setMsg(data.error || "Something went wrong.", "error"); return; }
+        showReceipt(data.appointment, data.id);
+        form.reset(); selectedDoctorId = null;
+        document.querySelectorAll(".doc-opt").forEach(e => e.classList.remove("selected"));
+      } catch { setMsg("Network error. Please try again.", "error"); }
+      finally { sub.disabled = false; sub.textContent = "Confirm Appointment"; }
+    });
+
+    document.getElementById("bookingList").addEventListener("click", async e => {
+      const btn = e.target.closest(".btn-cancel");
+      if (!btn) return;
+      btn.textContent = "..."; btn.disabled = true;
+      await fetch(`/api/appointments/${btn.dataset.id}`, { method: "DELETE" });
+      loadBookings();
+    });
+
+    function showReceipt(a, id) {
+      document.getElementById("r-name").textContent = a.name;
+      document.getElementById("r-phone").textContent = a.phone;
+      document.getElementById("r-doctor").textContent = a.doctorName;
+      document.getElementById("r-specialty").textContent = a.specialty;
+      document.getElementById("r-date").textContent = fmtDate(a.date);
+      document.getElementById("r-slot").textContent = a.slot;
+      document.getElementById("r-id").textContent = `Booking ID: ${id}`;
+      document.getElementById("modalOverlay").classList.add("open");
+    }
+
+    document.getElementById("modalClose").addEventListener("click", () => document.getElementById("modalOverlay").classList.remove("open"));
+    document.getElementById("modalOverlay").addEventListener("click", e => { if (e.target === document.getElementById("modalOverlay")) document.getElementById("modalOverlay").classList.remove("open"); });
+
+    function setMsg(t, type) { msg.textContent = t; msg.className = `msg ${type}`; }
+    function fmtDate(d) { if (!d) return d; const [y, m, day] = d.split("-"); return `${day} ${["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][+m - 1]} ${y}`; }
+    function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+
+    document.getElementById("date").min = new Date().toISOString().split("T")[0];
+    await Promise.all([loadSlots(), loadDoctors()]);
+
+  </script>
+</body>
+
+</html>
