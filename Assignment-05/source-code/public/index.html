@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JourneyHub — Travel Made Simple</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <span class="logo" onclick="showPage('home')">&#9992; JourneyHub</span>
+      <ul class="nav-links" id="navLinks">
+        <li><a onclick="showPage('home')">Home</a></li>
+        <li><a onclick="showPage('packages')">Packages</a></li>
+        <li><a onclick="showPage('booking')">Book a Trip</a></li>
+        <li><a onclick="showPage('lookup')">My Booking</a></li>
+        <li><a onclick="showPage('contact')">Contact</a></li>
+      </ul>
+      <button class="hamburger" onclick="toggleNav()">&#9776;</button>
+    </div>
+  </nav>
+
+  <!-- TOAST -->
+  <div id="toast" class="toast" style="display:none"></div>
+
+  <!-- HOME -->
+  <div id="page-home" class="page">
+
+    <section class="hero">
+      <div class="hero-slides">
+        <div class="slide active"
+          style="background-image:url('https://images.unsplash.com/photo-1564507592333-c60657eea523?w=1400')"></div>
+        <div class="slide"
+          style="background-image:url('https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=1400')"></div>
+        <div class="slide"
+          style="background-image:url('https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=1400')"></div>
+      </div>
+      <div class="hero-overlay"></div>
+      <div class="hero-text">
+        <p class="label">India&#39;s Simple Travel Planner</p>
+        <h1>Plan Your Next<br><span class="highlight">Adventure</span></h1>
+        <p class="sub">Handpicked tours across India, all in one place.<br>All prices in INR &#8212; no hidden fees.</p>
+        <div class="hero-btns">
+          <button class="btn btn-primary" onclick="showPage('packages')">Browse Packages</button>
+          <button class="btn btn-ghost" onclick="showPage('booking')">Book a Trip</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="section-top reveal">
+          <h2>Our Packages</h2>
+          <button class="btn btn-sm btn-outline" onclick="showPage('packages')">View All</button>
+        </div>
+        <div class="grid reveal" id="homeGrid">
+          <p class="muted">Loading packages...</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section why-section">
+      <div class="wrap">
+        <div class="why-grid">
+          <div class="why-left reveal">
+            <p class="sec-eye">Why JourneyHub</p>
+            <h2>Travel Differently</h2>
+            <p class="why-desc">We don&#39;t just book trips &#8212; we plan experiences. Every package is handpicked
+              for the Indian traveller, with transparent INR pricing and zero hidden fees.</p>
+            <div class="why-features">
+              <div class="why-feat">
+                <div class="why-feat-icon">&#128274;</div>
+                <div>
+                  <h4>100% Secure Booking</h4>
+                  <p>Your data and money are always safe with us.</p>
+                </div>
+              </div>
+              <div class="why-feat">
+                <div class="why-feat-icon">&#8377;</div>
+                <div>
+                  <h4>All Prices in INR</h4>
+                  <p>No currency confusion. No hidden charges. Ever.</p>
+                </div>
+              </div>
+              <div class="why-feat">
+                <div class="why-feat-icon">&#128172;</div>
+                <div>
+                  <h4>Quick Support</h4>
+                  <p>Send us an enquiry and we reply within a few hours.</p>
+                </div>
+              </div>
+              <div class="why-feat">
+                <div class="why-feat-icon">&#127963;</div>
+                <div>
+                  <h4>Handpicked Tours</h4>
+                  <p>Every destination is personally selected and verified.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="why-right reveal">
+            <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=700" alt="Travel" class="why-img">
+            <div class="why-badge">
+              <span class="why-badge-num">4.9</span>
+              <div><strong>&#9733; Trusted Rating</strong><small>By 1000+ Indian travellers</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- PACKAGES -->
+  <div id="page-packages" class="page" style="display:none">
+    <div class="page-banner">
+      <h1>All Packages</h1>
+      <p>4 handpicked destinations across India</p>
+    </div>
+    <section class="section">
+      <div class="wrap">
+        <div class="filters">
+          <input type="text" id="pkgSearch" placeholder="Search by name...">
+          <select id="pkgCat">
+            <option value="">All Categories</option>
+            <option>Cultural</option>
+            <option>Beach</option>
+            <option>Adventure</option>
+          </select>
+          <button class="btn btn-primary btn-sm" onclick="loadPackages()">Search</button>
+          <button class="btn btn-outline btn-sm" onclick="resetFilters()">Clear</button>
+        </div>
+        <p id="pkgCount" class="muted" style="margin-bottom:20px"></p>
+        <div class="grid" id="pkgGrid">
+          <p class="muted">Loading...</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- DETAIL -->
+  <div id="page-detail" class="page" style="display:none">
+    <div id="detailContent"></div>
+  </div>
+
+  <!-- BOOKING -->
+  <div id="page-booking" class="page" style="display:none">
+    <div class="page-banner">
+      <h1>Book a Trip</h1>
+      <p>Fill in your details and we&#39;ll confirm your booking</p>
+    </div>
+    <section class="section">
+      <div class="wrap wrap-sm">
+        <div class="card">
+
+          <div id="bookAlert" class="alert alert-error" style="display:none">
+            <strong>Please fix the following:</strong>
+            <ul id="bookAlertList"></ul>
+            <button class="close-btn" onclick="this.parentElement.style.display='none'">&#215;</button>
+          </div>
+          <div id="bookSuccess" class="alert alert-success" style="display:none">
+            <strong>Booking confirmed! &#127881;</strong>
+            <p id="bookSuccessMsg"></p>
+          </div>
+
+          <h2>Your Details</h2>
+          <p class="muted" style="margin-bottom:24px">Fields marked <span class="req">*</span> are required</p>
+
+          <div class="field">
+            <label>Package <span class="req">*</span></label>
+            <select id="bPkg" onchange="onPkgSelect()">
+              <option value="">-- Choose a package --</option>
+            </select>
+            <span class="err" id="err-pkg"></span>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label>First Name <span class="req">*</span></label>
+              <input type="text" id="bFirst" placeholder="Rahul">
+              <span class="err" id="err-first"></span>
+            </div>
+            <div class="field">
+              <label>Last Name <span class="req">*</span></label>
+              <input type="text" id="bLast" placeholder="Sharma">
+              <span class="err" id="err-last"></span>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label>Email <span class="req">*</span></label>
+              <input type="email" id="bEmail" placeholder="rahul@gmail.com">
+              <span class="err" id="err-email"></span>
+            </div>
+            <div class="field">
+              <label>Mobile <span class="req">*</span></label>
+              <div class="phone-field">
+                <span class="prefix">+91</span>
+                <input type="tel" id="bPhone" placeholder="98765 43210" maxlength="10">
+              </div>
+              <span class="err" id="err-phone"></span>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label>City <span class="req">*</span></label>
+              <select id="bCity">
+                <option value="">-- Select --</option>
+                <option>Mumbai, Maharashtra</option>
+                <option>Delhi, Delhi NCR</option>
+                <option>Bengaluru, Karnataka</option>
+                <option>Chennai, Tamil Nadu</option>
+                <option>Kolkata, West Bengal</option>
+                <option>Hyderabad, Telangana</option>
+                <option>Pune, Maharashtra</option>
+                <option>Ahmedabad, Gujarat</option>
+                <option>Jaipur, Rajasthan</option>
+                <option>Kochi, Kerala</option>
+                <option>Other</option>
+              </select>
+              <span class="err" id="err-city"></span>
+            </div>
+            <div class="field">
+              <label>Travel Date <span class="req">*</span></label>
+              <input type="date" id="bDate">
+              <span class="err" id="err-date"></span>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label>Adults</label>
+              <select id="bAdults" onchange="calcPrice()">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Children <small>(under 12)</small></label>
+              <select id="bChildren" onchange="calcPrice()">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Special Requests</label>
+            <textarea id="bRequests" rows="3" placeholder="Dietary needs, accessibility requirements, etc."></textarea>
+          </div>
+
+          <div class="price-box" id="priceBox" style="display:none">
+            <h4>Price Estimate</h4>
+            <div class="price-row"><span>Adults (<span id="ps-a">1</span> x <span id="ps-pp">Rs.0</span>)</span><span
+                id="ps-at">Rs.0</span></div>
+            <div class="price-row" id="ps-crow" style="display:none"><span>Children (<span id="ps-c">0</span> x <span
+                  id="ps-cp">Rs.0</span>) 50% off</span><span id="ps-ct">Rs.0</span></div>
+            <div class="price-row"><span>GST (5%)</span><span id="ps-gst">Rs.0</span></div>
+            <div class="price-row price-total"><span><strong>Total</strong></span><span
+                id="ps-tot"><strong>Rs.0</strong></span></div>
+          </div>
+
+          <div class="field" style="margin-top:8px">
+            <label class="checkbox-label">
+              <input type="checkbox" id="bTerms">
+              I agree to the Terms &amp; Conditions
+            </label>
+            <span class="err" id="err-terms"></span>
+          </div>
+
+          <button class="btn btn-primary btn-block" onclick="submitBooking()">Confirm Booking</button>
+          <p class="secure-note">&#128274; Secure booking &#8212; your data is safe</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- LOOKUP -->
+  <div id="page-lookup" class="page" style="display:none">
+    <div class="page-banner">
+      <h1>My Booking</h1>
+      <p>Enter your reference number to check your trip details</p>
+    </div>
+    <section class="section">
+      <div class="wrap wrap-sm">
+        <div class="card">
+          <h2>Find My Booking</h2>
+          <div class="field" style="margin-top:20px">
+            <label>Booking Reference</label>
+            <input type="text" id="lookupRef" placeholder="e.g. JH1ABC2DEF" style="text-transform:uppercase">
+          </div>
+          <button class="btn btn-primary btn-block" onclick="lookupBooking()">Search</button>
+        </div>
+        <div id="lookupResult" style="margin-top:20px"></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- CONTACT -->
+  <div id="page-contact" class="page" style="display:none">
+    <div class="page-banner">
+      <h1>Contact Us</h1>
+      <p>Send us a message and we&#39;ll get back to you</p>
+    </div>
+    <section class="section">
+      <div class="wrap wrap-sm">
+        <div class="card">
+
+          <div id="contactAlert" class="alert alert-error" style="display:none">
+            <strong>Please fix the following:</strong>
+            <ul id="contactAlertList"></ul>
+            <button class="close-btn" onclick="this.parentElement.style.display='none'">&#215;</button>
+          </div>
+          <div id="contactSuccess" class="alert alert-success" style="display:none">
+            <strong>Message sent! &#9989;</strong>
+            <p>We&#39;ll get back to you within a few hours.</p>
+          </div>
+
+          <h2>Send an Enquiry</h2>
+          <p class="muted" style="margin-bottom:24px">We read every message and reply within a few hours.</p>
+
+          <div class="field-row">
+            <div class="field">
+              <label>Your Name *</label>
+              <input type="text" id="cName" placeholder="Rahul Sharma">
+              <span class="err" id="err-cname"></span>
+            </div>
+            <div class="field">
+              <label>Email *</label>
+              <input type="email" id="cEmail" placeholder="rahul@gmail.com">
+              <span class="err" id="err-cemail"></span>
+            </div>
+          </div>
+          <div class="field">
+            <label>Message *</label>
+            <textarea id="cMsg" rows="5" placeholder="Ask us anything about a package, dates, group size..."></textarea>
+            <span class="err" id="err-cmsg"></span>
+          </div>
+          <button class="btn btn-primary btn-block" onclick="submitEnquiry()">Send Message</button>
+
+          <div class="recent-enquiries">
+            <h4>Recent Enquiries</h4>
+            <ul id="enquiryList">
+              <li class="muted">Loading...</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>&#9992; JourneyHub &nbsp;&mdash;&nbsp; &copy; 2026 All rights reserved.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+
+</html>
