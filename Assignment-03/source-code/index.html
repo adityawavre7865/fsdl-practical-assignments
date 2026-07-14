@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUXE | Premium Fashion Store</title>
+    <meta name="description"
+        content="Discover the latest in high-end fashion with LUXE. Curated luxury outerwear, evening wear, and accessories.">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Bootstrap CDN (Optional Grid Support) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="#" class="brand">LUXE<span>.</span></a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="collections.html">Collections</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+        <div class="nav-icons">
+            <i class="fa-solid fa-magnifying-glass search-icon" onclick="toggleSearch(true)"></i>
+            <div class="cart-icon" onclick="toggleCart(true)">
+                <i class="fa-solid fa-bag-shopping"></i>
+                <span id="cart-count">0</span>
+            </div>
+            <div class="account-icon" onclick="toggleAccount()">
+                <i class="fa-solid fa-user"></i>
+                <div class="account-dropdown" id="account-dropdown">
+                    <a href="#">Order History</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Overlay -->
+    <div class="search-overlay" id="search-overlay">
+        <input type="text" class="search-input" placeholder="Search for luxury products..."
+            onkeyup="handleSearch(event)">
+        <i class="fa-solid fa-xmark close-search" onclick="toggleSearch(false)"></i>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="hero" id="home">
+        <div class="hero-content">
+            <p>SS24 COLLECTION</p>
+            <h1>ELEVATE YOUR<br>STYLE AESTHETIC</h1>
+            <button class="btn-primary"
+                onclick="document.getElementById('shop').scrollIntoView({behavior: 'smooth'})">Explore
+                Collection</button>
+        </div>
+    </header>
+
+    <!-- Product Section -->
+    <section class="products" id="shop">
+        <h2 class="section-title">New Arrivals</h2>
+        <div class="product-grid">
+            <!-- Products will be injected by JS -->
+        </div>
+    </section>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar">
+        <div class="cart-header">
+            <h3>Shopping Bag</h3>
+            <i class="fa-solid fa-xmark close-cart" onclick="toggleCart(false)"></i>
+        </div>
+        <div class="cart-items">
+            <!-- Cart items injected by JS -->
+        </div>
+        <div class="cart-footer">
+            <div class="total">
+                <span>Total:</span>
+                <span id="total-price">$0</span>
+            </div>
+            <button class="checkout-btn">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+
+</html>

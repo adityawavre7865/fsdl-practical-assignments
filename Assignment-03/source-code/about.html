@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | LUXE Premium Fashion</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .about-hero {
+            height: 60vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('C:/Users/Sneha/.gemini/antigravity/brain/745a6653-970b-4d34-bee0-b89a212f9dc6/about_hero_luxury_v2_1770013359580.png');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .about-content {
+            padding: 8rem 5%;
+            max-width: 1000px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .vision-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4rem;
+            margin-top: 6rem;
+            text-align: center;
+        }
+
+        .vision-item i {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 2rem;
+        }
+
+        .vision-item h4 {
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="scrolled">
+        <a href="index.html" class="brand">LUXE<span>.</span></a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="collections.html">Collections</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+        <div class="nav-icons">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <div class="cart-icon" onclick="toggleCart(true)">
+                <i class="fa-solid fa-bag-shopping"></i>
+                <span id="cart-count">0</span>
+            </div>
+            <i class="fa-solid fa-user"></i>
+        </div>
+    </nav>
+
+    <header class="about-hero">
+        <div class="hero-content">
+            <h1>OUR STORY</h1>
+        </div>
+    </header>
+
+    <main class="about-content">
+        <h2 class="section-title">Redefining Modern Luxury</h2>
+        <p>Founded in 2024, LUXE was born out of a desire to create a fashion house that prioritizes timeless design
+            over fleeting trends. We believe that true luxury lies in the details—the curve of a seam, the weight of a
+            fabric, and the enduring quality of craftsmanship.</p>
+        <p>Our studio in the heart of the city serves as a sanctuary for creativity, where our designers blend
+            traditional techniques with avant-garde aesthetics. Every piece in our collection is a testament to our
+            commitment to excellence.</p>
+
+        <div class="vision-grid">
+            <div class="vision-item">
+                <i class="fa-solid fa-gem"></i>
+                <h4>Craftsmanship</h4>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Meticulously hand-finished by master artisans
+                    using the world's finest materials.</p>
+            </div>
+            <div class="vision-item">
+                <i class="fa-solid fa-leaf"></i>
+                <h4>Sustainability</h4>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Committed to ethical sourcing and reducing our
+                    environmental footprint at every step.</p>
+            </div>
+            <div class="vision-item">
+                <i class="fa-solid fa-infinity"></i>
+                <h4>Timelessness</h4>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Designs that transcend seasons, intended to be
+                    cherished for a lifetime.</p>
+            </div>
+        </div>
+    </main>
+
+    <div class="cart-sidebar">
+        <div class="cart-header">
+            <h3>Shopping Bag</h3><i class="fa-solid fa-xmark close-cart" onclick="toggleCart(false)"></i>
+        </div>
+        <div class="cart-items"></div>
+        <div class="cart-footer">
+            <div class="total"><span>Total:</span><span id="total-price">$0</span></div>
+            <button class="checkout-btn">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

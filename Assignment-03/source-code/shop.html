@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop | LUXE Premium Fashion</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .shop-hero {
+            height: 60vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1441984908747-d412803b0c26?auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .filter-bar {
+            padding: 2rem 5%;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: transparent;
+            border: 1px solid var(--glass-border);
+            color: var(--text);
+            padding: 0.8rem 2rem;
+            cursor: pointer;
+            transition: var(--transition);
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="scrolled">
+        <a href="index.html" class="brand">LUXE<span>.</span></a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="collections.html">Collections</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+        <div class="nav-icons">
+            <i class="fa-solid fa-magnifying-glass search-icon" onclick="toggleSearch(true)"></i>
+            <div class="cart-icon" onclick="toggleCart(true)">
+                <i class="fa-solid fa-bag-shopping"></i>
+                <span id="cart-count">0</span>
+            </div>
+            <div class="account-icon" onclick="toggleAccount()">
+                <i class="fa-solid fa-user"></i>
+                <div class="account-dropdown" id="account-dropdown">
+                    <a href="#">My Profile</a>
+                    <a href="#">Order History</a>
+                    <a href="#">Settings</a>
+                    <a href="#" style="color: #ff4444;">Logout</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Overlay -->
+    <div class="search-overlay" id="search-overlay">
+        <input type="text" class="search-input" placeholder="Search for luxury products..."
+            onkeyup="handleSearch(event)">
+        <i class="fa-solid fa-xmark close-search" onclick="toggleSearch(false)"></i>
+    </div>
+
+    <header class="shop-hero">
+        <div class="hero-content">
+            <h1>THE SHOP</h1>
+            <p>Curated Excellence for Every Occasion</p>
+        </div>
+    </header>
+
+    <div class="filter-bar">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="Outerwear">Outerwear</button>
+        <button class="filter-btn" data-filter="Evening Wear">Evening Wear</button>
+        <button class="filter-btn" data-filter="Footwear">Footwear</button>
+        <button class="filter-btn" data-filter="Accessories">Accessories</button>
+        <button class="filter-btn" data-filter="Watches">Watches</button>
+    </div>
+
+    <section class="products">
+        <div class="product-grid" id="shop-grid">
+            <!-- Products will be injected by JS -->
+        </div>
+    </section>
+
+    <div class="cart-sidebar">
+        <div class="cart-header">
+            <h3>Shopping Bag</h3>
+            <i class="fa-solid fa-xmark close-cart" onclick="toggleCart(false)"></i>
+        </div>
+        <div class="cart-items"></div>
+        <div class="cart-footer">
+            <div class="total">
+                <span>Total:</span>
+                <span id="total-price">$0</span>
+            </div>
+            <button class="checkout-btn">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Shop specific logic
+        const shopGrid = document.getElementById('shop-grid');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+
+        function renderFilteredProducts(category = 'all') {
+            const filtered = category === 'all'
+                ? products
+                : products.filter(p => p.category === category);
+
+            shopGrid.innerHTML = filtered.map(product => `
+                <div class="product-card glass" style="margin-bottom: 2rem;">
+                    <img src="${product.image}" alt="${product.name}" class="product-image" onerror="this.src='https://images.unsplash.com/photo-1491336477066-31156b5e4f35?auto=format&fit=crop&w=800&q=80'">
+                    <div class="product-info">
+                        <span style="color: grey; font-size: 0.8rem; text-transform: uppercase;">${product.category}</span>
+                        <h3>${product.name}</h3>
+                        <span class="product-price">$${product.price.toLocaleString()}</span>
+                        <button class="add-btn" onclick="addToCart(${product.id})">Add to Bag</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                renderFilteredProducts(btn.dataset.filter);
+            });
+        });
+
+        // Override default render if on shop page
+        if (shopGrid) renderFilteredProducts();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - LUXE Fashion Store</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Inter:wght@300;400;600&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav>
+        <a href="index.html" class="brand">LUXE<span>.</span></a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="collections.html">Collections</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+        <div class="nav-icons">
+            <i class="fa-solid fa-magnifying-glass search-icon" onclick="toggleSearch(true)"></i>
+            <div class="cart-icon" onclick="toggleCart(true)">
+                <i class="fa-solid fa-bag-shopping"></i>
+                <span id="cart-count">0</span>
+            </div>
+            <div class="account-icon" onclick="toggleAccount()">
+                <i class="fa-solid fa-user"></i>
+                <div class="account-dropdown" id="account-dropdown">
+                    <a href="#">Order History</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Overlay -->
+    <div class="search-overlay" id="search-overlay">
+        <input type="text" class="search-input" placeholder="Search for luxury products..."
+            onkeyup="handleSearch(event)">
+        <i class="fa-solid fa-xmark close-search" onclick="toggleSearch(false)"></i>
+    </div>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="contact-container glass">
+            <h2>Get in Touch</h2>
+            <form id="contactForm" class="contact-form"
+                action="https://docs.google.com/forms/d/e/YOUR_FORM_ID/formResponse" method="POST"
+                target="hidden_iframe" onsubmit="return validateContactForm()">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="entry.NAME_FIELD_ID" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="entry.EMAIL_FIELD_ID" placeholder="your@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="entry.PHONE_FIELD_ID" placeholder="Your Phone Number" required>
+                </div>
+                <div class="form-group">
+                    <label for="query">Message / Query</label>
+                    <textarea id="query" name="entry.QUERY_FIELD_ID" placeholder="How can we help you?"
+                        required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Hidden Iframe for silent submission -->
+    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+
+    <!-- Success Overlay -->
+    <div id="successOverlay" class="success-overlay">
+        <div class="success-content glass">
+            <i class="fa-solid fa-circle-check"></i>
+            <h3>Message Sent!</h3>
+            <p>Thank you for reaching out. We'll get back to you shortly.</p>
+        </div>
+    </div>
+
+    <!-- Shopping Cart Sidebar -->
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h3>Your Bag</h3>
+            <i class="fa-solid fa-xmark" onclick="toggleCart(false)"></i>
+        </div>
+        <div class="cart-items">
+            <!-- Items injected by JS -->
+        </div>
+        <div class="cart-footer">
+            <div class="total">
+                <span>Total</span>
+                <span id="total-price">$0</span>
+            </div>
+            <button class="checkout-btn">Checkout</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

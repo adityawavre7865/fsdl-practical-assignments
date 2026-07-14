@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collections | LUXE Premium Fashion</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .collections-hero {
+            height: 70vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .collection-section {
+            padding: 8rem 5%;
+        }
+
+        .lookbook-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .lookbook-item {
+            position: relative;
+            height: 600px;
+            overflow: hidden;
+            border-radius: 20px;
+        }
+
+        .lookbook-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .lookbook-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .lookbook-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 3rem;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .lookbook-item:hover .lookbook-overlay {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="scrolled">
+        <a href="index.html" class="brand">LUXE<span>.</span></a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="collections.html">Collections</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+        <div class="nav-icons">
+            <i class="fa-solid fa-magnifying-glass search-icon" onclick="toggleSearch(true)"></i>
+            <div class="cart-icon" onclick="toggleCart(true)">
+                <i class="fa-solid fa-bag-shopping"></i>
+                <span id="cart-count">0</span>
+            </div>
+            <div class="account-icon" onclick="toggleAccount()">
+                <i class="fa-solid fa-user"></i>
+                <div class="account-dropdown" id="account-dropdown">
+                    <a href="#">My Profile</a>
+                    <a href="#">Order History</a>
+                    <a href="#">Settings</a>
+                    <a href="#" style="color: #ff4444;">Logout</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Overlay -->
+    <div class="search-overlay" id="search-overlay">
+        <input type="text" class="search-input" placeholder="Search for luxury products..."
+            onkeyup="handleSearch(event)">
+        <i class="fa-solid fa-xmark close-search" onclick="toggleSearch(false)"></i>
+    </div>
+
+    <header class="collections-hero">
+        <div class="hero-content">
+            <p>EDITORIAL</p>
+            <h1>SEASONAL COLLECTIONS</h1>
+        </div>
+    </header>
+
+    <section class="collection-section">
+        <div class="text-center">
+            <h2 class="section-title">Spring / Summer 2024</h2>
+            <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto;">Exploring the intersection of
+                architectural structure and fluid movement. Our SS24 collection defines modern elegance with a
+                monochromatic palette and premium textures.</p>
+        </div>
+
+        <div class="lookbook-grid">
+            <div class="lookbook-item">
+                <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1600&q=80"
+                    alt="Look 1">
+                <div class="lookbook-overlay">
+                    <h3>The Midnight Series</h3>
+                    <p>Structured tailoring for the modern urbanite.</p>
+                </div>
+            </div>
+            <div class="lookbook-item">
+                <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=1600&q=80"
+                    alt="Look 2">
+                <div class="lookbook-overlay">
+                    <h3>Silk & Shadow</h3>
+                    <p>Ethereal gowns designed for unforgettable evenings.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="cart-sidebar">
+        <div class="cart-header">
+            <h3>Shopping Bag</h3><i class="fa-solid fa-xmark close-cart" onclick="toggleCart(false)"></i>
+        </div>
+        <div class="cart-items"></div>
+        <div class="cart-footer">
+            <div class="total"><span>Total:</span><span id="total-price">$0</span></div>
+            <button class="checkout-btn">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
