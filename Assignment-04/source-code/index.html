@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeatherNova Pro | India Weather Intelligence</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Background Animation Layer -->
+        <div class="bg-vignette"></div>
+        <div class="bg-blobs">
+            <div class="blob blob-1"></div>
+            <div class="blob blob-2"></div>
+        </div>
+
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-cloud-bolt"></i>
+                </div>
+                <span>WeatherNova <small>PRO</small></span>
+            </div>
+
+            <nav class="nav-menu">
+                <ul>
+                    <li class="active" id="nav-dashboard" data-view="dashboard"><i class="fas fa-house-user"></i>
+                        Dashboard</li>
+                    <li id="nav-analytics" data-view="analytics"><i class="fas fa-chart-line"></i> Analytics</li>
+                    <li id="nav-aqi" data-view="aqi"><i class="fas fa-wind"></i> Air Quality</li>
+                    <li id="nav-alerts" data-view="alerts"><i class="fas fa-bell"></i> Alerts</li>
+                </ul>
+            </nav>
+
+            <div class="location-hub">
+                <div class="section-header">
+                    <h3>India Hub</h3>
+                    <i class="fas fa-location-crosshairs"></i>
+                </div>
+                <div class="city-list" id="city-list">
+                    <button class="city-btn active" data-city="Mumbai">
+                        <span class="city-name">Mumbai</span>
+                        <span class="city-temp">31°</span>
+                    </button>
+                    <button class="city-btn" data-city="Delhi">
+                        <span class="city-name">Delhi</span>
+                        <span class="city-temp">24°</span>
+                    </button>
+                    <button class="city-btn" data-city="Bangalore">
+                        <span class="city-name">Bangalore</span>
+                        <span class="city-temp">28°</span>
+                    </button>
+                    <button class="city-btn" data-city="Chennai">
+                        <span class="city-name">Chennai</span>
+                        <span class="city-temp">32°</span>
+                    </button>
+                    <button class="city-btn" data-city="Kolkata">
+                        <span class="city-name">Kolkata</span>
+                        <span class="city-temp">29°</span>
+                    </button>
+                    <button class="city-btn" data-city="Hyderabad">
+                        <span class="city-name">Hyderabad</span>
+                        <span class="city-temp">30°</span>
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="search-box">
+                    <i class="fas fa-magnifying-glass"></i>
+                    <input type="text" id="city-search" placeholder="Explore any city in India...">
+                    <span class="shortcut">⌘ K</span>
+                </div>
+                <div class="profile-actions">
+                    <button class="icon-btn" id="theme-toggle"><i class="far fa-moon" id="theme-icon"></i></button>
+                    <button class="icon-btn"><i class="far fa-bell"></i></button>
+                    <div class="user-pill">
+                        <img src="https://ui-avatars.com/api/?name=Swayam&background=6366f1&color=fff&bold=true"
+                            alt="User">
+                        <span>Swayam</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="dashboard-viewport">
+                <!-- Hero Section -->
+                <section class="hero-weather">
+                    <div class="weather-main-card glass">
+                        <div class="hero-header">
+                            <div>
+                                <h1 id="hero-city">Mumbai, Maharashtra</h1>
+                                <p id="hero-date">Monday, 09 Feb 2026 • 12:45 PM</p>
+                            </div>
+                            <div class="live-tag">
+                                <span class="pulse"></span> LIVE
+                            </div>
+                        </div>
+                        <div class="hero-body">
+                            <div class="hero-temp-block">
+                                <span class="temp" id="hero-temp">31</span>
+                                <span class="unit">°C</span>
+                                <div class="condition-meta">
+                                    <i class="fas fa-sun yellow-glow" id="hero-icon"></i>
+                                    <span id="hero-condition">Mainly Sunny</span>
+                                </div>
+                            </div>
+                            <div class="hero-stats-grid">
+                                <div class="mini-stat">
+                                    <i class="fas fa-droplet"></i>
+                                    <div>
+                                        <small>Humidity</small>
+                                        <strong id="hero-humidity">64%</strong>
+                                    </div>
+                                </div>
+                                <div class="mini-stat">
+                                    <i class="fas fa-wind"></i>
+                                    <div>
+                                        <small>Wind Speed</small>
+                                        <strong id="hero-wind">14 km/h</strong>
+                                    </div>
+                                </div>
+                                <div class="mini-stat">
+                                    <i class="fas fa-eye"></i>
+                                    <div>
+                                        <small>Visibility</small>
+                                        <strong id="hero-visibility">8 km</strong>
+                                    </div>
+                                </div>
+                                <div class="mini-stat">
+                                    <i class="fas fa-compress-arrows-alt"></i>
+                                    <div>
+                                        <small>Pressure</small>
+                                        <strong id="hero-pressure">1012 hPa</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="aqi-card glass">
+                        <h3>Air Quality Index (AQI)</h3>
+                        <div class="aqi-meter">
+                            <div class="aqi-value" id="aqi-val">84</div>
+                            <div class="aqi-status moderate" id="aqi-status">Moderate</div>
+                        </div>
+                        <div class="aqi-progress-bar">
+                            <div class="progress" style="width: 42%; background: #fbbf24;"></div>
+                        </div>
+                        <p class="aqi-advice">Sensitive groups should reduce outdoor activity.</p>
+                        <div class="aqi-details">
+                            <div class="aqi-item"><span>PM2.5</span><strong>18.4</strong></div>
+                            <div class="aqi-item"><span>O3</span><strong>42.1</strong></div>
+                            <div class="aqi-item"><span>NO2</span><strong>12.5</strong></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Visualization Row -->
+                <section class="viz-grid">
+                    <div class="chart-wrapper glass">
+                        <div class="chart-header">
+                            <h3>Temperature Dynamics</h3>
+                            <div class="chart-tabs">
+                                <button class="active">24h</button>
+                                <button>7d</button>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="tempDynamicChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="forecast-panel glass">
+                        <h3>Extended Forecast</h3>
+                        <div class="forecast-scroll" id="forecast-scroll">
+                            <!-- Injected by JS -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Secondary Widgets -->
+                <section class="widget-row">
+                    <div class="widget-box glass">
+                        <div class="widget-icon sun-theme"><i class="fas fa-sun-plant-wilt"></i></div>
+                        <div class="widget-info">
+                            <small>UV Index</small>
+                            <h4 id="uv-index">6 | Moderate</h4>
+                        </div>
+                    </div>
+                    <div class="widget-box glass">
+                        <div class="widget-icon sunrise-theme"><i class="fas fa-sun-plant-wilt"></i></div>
+                        <div class="widget-info">
+                            <small>Sunrise</small>
+                            <h4 id="sunrise-time">06:42 AM</h4>
+                        </div>
+                    </div>
+                    <div class="widget-box glass">
+                        <div class="widget-icon sunset-theme"><i class="fas fa-sun-plant-wilt"></i></div>
+                        <div class="widget-info">
+                            <small>Sunset</small>
+                            <h4 id="sunset-time">06:15 PM</h4>
+                        </div>
+                    </div>
+                    <div class="widget-box glass">
+                        <div class="widget-icon rain-theme"><i class="fas fa-cloud-rain"></i></div>
+                        <div class="widget-info">
+                            <small>Chance of Rain</small>
+                            <h4 id="rain-chance">12%</h4>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- New Charts Row: Precipitation + Humidity -->
+                <section class="charts-duo-row">
+                    <!-- Hourly Precipitation Bar Chart -->
+                    <div class="chart-wrapper glass precip-chart-card">
+                        <div class="chart-header">
+                            <div class="chart-title-group">
+                                <div class="chart-icon-badge precip-badge">
+                                    <i class="fas fa-cloud-showers-heavy"></i>
+                                </div>
+                                <div>
+                                    <h3>Hourly Precipitation</h3>
+                                    <p class="chart-subtitle">Today's rainfall forecast (mm)</p>
+                                </div>
+                            </div>
+                            <div class="precip-total-badge">
+                                <span id="precip-total-label">Total: </span><strong id="precip-total-val">--</strong><span> mm</span>
+                            </div>
+                        </div>
+                        <div class="chart-container precip-chart-container">
+                            <canvas id="precipChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Humidity Doughnut Chart -->
+                    <div class="chart-wrapper glass humidity-donut-card">
+                        <div class="chart-header">
+                            <div class="chart-title-group">
+                                <div class="chart-icon-badge humid-badge">
+                                    <i class="fas fa-droplet"></i>
+                                </div>
+                                <div>
+                                    <h3>Humidity Distribution</h3>
+                                    <p class="chart-subtitle">Relative humidity breakdown</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="donut-layout">
+                            <div class="donut-canvas-wrap">
+                                <canvas id="humidityDonutChart"></canvas>
+                                <div class="donut-center-label">
+                                    <span id="donut-value">--</span>
+                                    <small>% RH</small>
+                                </div>
+                            </div>
+                            <div class="donut-legend" id="donut-legend"></div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Premium Alerts Modal -->
+        <div class="overlay" id="alerts-modal">
+            <div class="modal glass animate-modal">
+                <div class="modal-header">
+                    <h2><i class="fas fa-triangle-exclamation"></i> Weather Alerts</h2>
+                    <button class="close-btn" id="close-modal">&times;</button>
+                </div>
+                <div class="modal-body" id="modal-content">
+                    <!-- Dynamic Alert Content -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
