@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Full Stack Development Lab</title>
+  <style>
+    body {
+      font-family: Times New Roman, serif;
+      background-color: #fff;
+      margin: 40px;
+      color: #000;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid #999;
+    }
+
+    thead tr {
+      background-color: #4b3f8f;
+      color: #fff;
+    }
+
+    thead th {
+      padding: 10px 14px;
+      text-align: center;
+      font-size: 15px;
+      border: 1px solid #999;
+    }
+
+    tbody tr {
+      background-color: #fff;
+    }
+
+    tbody td {
+      padding: 10px 14px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    tbody td:first-child {
+      font-family: monospace;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    .example-col {
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Full Stack Development Lab</h1>
+  <h2>Assignment 1: Create a static web page which defines all text formatting tags of HTML in tabular format.</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Tag</th>
+        <th>Description</th>
+        <th>Example Output</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>&lt;b&gt;</td>
+        <td>The element defines bold text, without any extra importance.</td>
+        <td class="example-col"><b>Bold</b></td>
+      </tr>
+      <tr>
+        <td>&lt;strong&gt;</td>
+        <td>The HTML element defines text with strong importance. The content inside is typically displayed in bold.(semantic bold)</td>
+        <td class="example-col"><strong>Strong</strong></td>
+      </tr>
+      <tr>
+        <td>&lt;i&gt;</td>
+        <td>The HTML element defines a part of text in an alternate voice or mood. The content inside is typically displayed in italic.</td>
+        <td class="example-col"><i>Italic</i></td>
+      </tr>
+      <tr>
+        <td>&lt;em&gt;</td>
+        <td>The HTML element defines emphasized text. The content inside is typically displayed in italic.</td>
+        <td class="example-col"><em>Emphasized text</em></td>
+      </tr>
+      <tr>
+        <td>&lt;mark&gt;</td>
+        <td>The HTML element defines text that should be marked or highlighted</td>
+        <td class="example-col"><mark>Marked text</mark></td>
+      </tr>
+      <tr>
+        <td>&lt;small&gt;</td>
+        <td>The HTML element defines smaller text</td>
+        <td class="example-col"><small>Smaller text</small></td>
+      </tr>
+      <tr>
+        <td>&lt;del&gt;</td>
+        <td>The HTML element defines text that has been deleted from a document. Browsers will usually strike a line through deleted text</td>
+        <td class="example-col"><del>Deleted text</del></td>
+      </tr>
+      <tr>
+        <td>&lt;ins&gt;</td>
+        <td>The HTML element defines a text that has been inserted into a document. Browsers will usually underline inserted text</td>
+        <td class="example-col"><ins>Inserted text</ins></td>
+      </tr>
+      <tr>
+        <td>&lt;sub&gt;</td>
+        <td>The HTML element defines subscript text. Subscript text appears half a character below the normal line, and is sometimes rendered in a smaller font. Subscript text can be used for chemical formulas, like H2O</td>
+        <td class="example-col">Subscript text H<sub>2</sub>O</td>
+      </tr>
+      <tr>
+        <td>&lt;sup&gt;</td>
+        <td>SThe HTML element defines superscript text. Superscript text appears half a character above the normal line, and is sometimes rendered in a smaller font. Superscript text can be used for footnotes, like WWW[1]</td>
+        <td class="example-col">Superscript text WWW<sup>[1]</sup></td>
+      </tr>
+    </tbody>
+  </table>
+
+</body>
+</html>
